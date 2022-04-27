@@ -1,11 +1,10 @@
 import {Component} from "react";
+import NavBar from "./components/common/navbar";
+
 
 class App extends Component{
   render() {
-    return (
-
-      <p>This is my first class-based Component, well not really tho</p>
-      )
+    return <NavBar />;
   }
 }
 

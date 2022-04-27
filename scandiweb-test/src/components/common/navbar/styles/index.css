@@ -1,0 +1,114 @@
+.nav-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 10px 0;
+  margin: 20px;
+  height: 50px;
+}
+
+.nav-items {
+  width: 20%;
+  font-weight: lighter;
+  font-size: 13px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.logo {
+  width: 13%;
+}
+
+.nav-item {
+  list-style: none;
+  height: 32px;
+  padding: 0 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: black;
+}
+
+.nav-actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 7%;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin: 0 10px;
+}
+
+.nav-actions .badge {
+  background-color: black;
+  color: white;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  right: 30px;
+  top: 20px;
+}
+
+.nav-actions .dropdown {
+  width: 100px;
+  position: absolute;
+  right: 40px;
+  top: 70px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-shadow: 2px 2px 20px 8px rgba(219, 214, 214, 0.2);
+          box-shadow: 2px 2px 20px 8px rgba(219, 214, 214, 0.2);
+  display: none;
+}
+
+.nav-actions .dropdown:hover {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.nav-actions .dropdown .dropdown-items {
+  width: 100%;
+  padding: 10px 0;
+  margin: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.nav-actions .dropdown .dropdown-items:hover {
+  background-color: #EEEEEE;
+}
+/*# sourceMappingURL=index.css.map */

@@ -49,6 +49,16 @@
   margin: 0 10px;
 }
 
+.nav-actions .currency-switch span {
+  margin: 0 5px;
+}
+
+.nav-actions .currency-switch:hover .dropdown {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .nav-actions .badge {
   background-color: black;
   color: white;
@@ -74,7 +84,7 @@
   width: 100px;
   position: absolute;
   right: 40px;
-  top: 70px;
+  top: 60px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -85,15 +95,9 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-shadow: 2px 2px 20px 8px rgba(219, 214, 214, 0.2);
-          box-shadow: 2px 2px 20px 8px rgba(219, 214, 214, 0.2);
+  -webkit-box-shadow: 2px 2px 20px 8px #a8acb030;
+          box-shadow: 2px 2px 20px 8px #a8acb030;
   display: none;
-}
-
-.nav-actions .dropdown:hover {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
 }
 
 .nav-actions .dropdown .dropdown-items {

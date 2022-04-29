@@ -1,0 +1,90 @@
+.product-container {
+  margin: 50px;
+}
+
+.product-category {
+  font-family: "Raleway", sans-serif;
+}
+
+.product-category p {
+  font-size: 42px;
+  font-weight: 400;
+  color: #1D1F22;
+}
+
+.product-listing {
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.product-listing .product-card:nth-of-type(3) {
+  opacity: .5;
+}
+
+.product-listing .product-card:hover {
+  background-color: white;
+  padding: 15px;
+  -webkit-box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+          box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+}
+
+.product-listing .product-card:hover .product .cart-hover {
+  display: block;
+  position: relative;
+  cursor: pointer;
+}
+
+.product-listing .product-card:hover .product .cart-hover img {
+  position: absolute;
+  top: -30px;
+  right: 6px;
+}
+
+.product-listing .product-card .product-stock {
+  position: relative;
+}
+
+.product-listing .product-card .product-stock span {
+  position: absolute;
+  top: 120px;
+  left: 90px;
+}
+
+.product-listing .product-card .product-stock span p {
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 160%;
+}
+
+.product-listing .product-card .product > div {
+  margin-bottom: 20px;
+}
+
+.product-listing .product-card .product .product-name {
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 160%;
+}
+
+.product-listing .product-card .product .product-price {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 160%;
+}
+
+.product-listing .product-card .product .cart-hover {
+  display: none;
+}
+
+.product-listing > * {
+  margin-bottom: 100px;
+}
+/*# sourceMappingURL=index.css.map */

@@ -1,4 +1,6 @@
 @import '../../../../styles/variables';
+@import '../../../../styles/mixins/shadow.mixin';
+
 
 .nav-container {
   display: flex;
@@ -40,6 +42,16 @@
   width: 7%;
   justify-content: space-around;
   margin: 0 10px;
+  .currency-switch {
+    span {
+      margin: 0 5px;
+    }
+    &:hover {
+      .dropdown {
+        display: flex;
+      }
+    }
+  }
   .badge {
     background-color: $accent-color;
     color: white;
@@ -59,16 +71,13 @@
     width: 100px;
     position: absolute;
     right: 40px;
-    top: 70px;
+    top: 60px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 2px 2px 20px 8px rgba(219, 214, 214, 0.2);
+    // @include shadow(2px, 2px, 20px, 8px, #dbd6d633);
+    box-shadow: $box-shadow;
     display: none;
-
-    &:hover {
-      display: flex;
-    }
 
     .dropdown-items {
       width: 100%;

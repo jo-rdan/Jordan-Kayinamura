@@ -1,0 +1,120 @@
+.container{
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 65px;                                                     
+}
+
+.product-graphics {
+  // background-color: orange;
+  width: 70%;
+  height: 60vh;
+  display: flex;
+  justify-content: space-between;
+  .thumbnails {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .thumb {
+    img {
+      width: 80px;
+      height: 80px
+    }
+  }
+  .product-img {
+    width: 85%;
+    height: 511px;
+    img {
+      width: 70%;
+    }
+  }
+}
+
+.product-info {
+  // background-color: dodgerblue;
+  width: 30%;
+  .product-details {
+    margin-bottom: 43px;
+    .title {
+      margin-bottom: 10px;
+      font-weight: 600;
+      font-size: 30px;
+      line-height: 27px;
+    }
+    .subtitle {
+      font-weight: 400;
+      font-size: 30px;
+      line-height: 27px;
+    }
+  }
+
+  .product-size {
+    .size-options {
+      width: 85%;
+      display: flex;
+      justify-content: space-between;
+      .size {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 65px;
+        height: 40px;
+        border: 1px solid #1D1F22;
+      }
+      .disabled {
+        border: 1px solid #A6A6A6;
+        color: #A6A6A6;
+      }
+      .selected {
+        background: #1D1F22;
+        border: 1px solid #1D1F22;
+        color: white
+      }
+    }
+  }
+
+  .color-options {
+    width: 32%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .color {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 32px;
+        height: 32px;
+      }
+      .blue {
+        background-color: rgb(105, 105, 133);
+      }
+      .yellow {
+        background-color: yellow;
+      }
+      .green {
+        background-color: green;
+      }
+      .active {
+        border: 2px solid #5ECE7B;
+      }
+  }
+
+  .product-price {
+    .price {
+      font-weight: 700;
+font-size: 24px;
+line-height: 18px;
+    }
+  }
+
+  .action-btn {
+    width: 85%;
+    border: none;
+    padding: 16px 32px;
+    background-color: #5ECE7B;
+    color: white;
+    text-transform: uppercase;
+    font-size: 16px;
+  }
+}

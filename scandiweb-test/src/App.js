@@ -1,4 +1,5 @@
 import { Component } from "react";
+import Minicart from "./components/common/mini-cart";
 import NavBar from "./components/common/navbar";
 import CartPage from "./pages/cart";
 import Product from "./pages/products/product-description";
@@ -9,9 +10,10 @@ class App extends Component {
     return (
       <>
         <NavBar />
-        {/* <Products /> */}
-        {/* <Product /> */}
+        <Products />
+        <Product />
         <CartPage />
+        <Minicart />
       </>
     );
   }

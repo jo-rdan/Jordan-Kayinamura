@@ -1,0 +1,200 @@
+@import './extendables';
+
+// 'normal' size styles
+
+.products-cart {
+  @extend %p-cart;
+}
+
+
+.product-details {
+  @extend %p-details;
+
+  .products-title {
+    @extend %p-title;
+  }
+
+  .products-subtitle {
+    @extend %p-subtitle;
+  }
+
+  .products-price {
+    @extend %p-price;
+  }
+
+  .products-sizes {
+    @extend %p-sizes;
+
+    .products-size {
+      @extend %p-size;
+    }
+
+    .disabled {
+      @extend %size-disabled;
+    }
+
+    .selected {
+      @extend %size-selected;
+    }
+  }
+
+  .products-colors {
+    @extend %p-colors;
+
+    .products-color {
+      @extend %p-color;
+    }
+
+    .active {
+      @extend %active-color;
+    }
+
+
+  }
+}
+
+.products-actions {
+  @extend %p-actions;
+
+  .controls {
+    @extend %p-controls;
+
+    .plus,
+    .minus {
+      @extend %operators;
+    }
+  }
+
+  .product-img {
+    @extend %p-img;
+
+    img {
+      @extend %image;
+      height: 100%;
+    }
+
+    .carousel {
+      position: relative;
+      width: 50%;
+
+      .arrows {
+        position: absolute;
+        bottom: 10px;
+        right: 20px;
+        display: flex;
+        justify-content: space-between;
+        width: 56px;
+      }
+
+      %arrow-container {
+        width: 24px;
+        height: 24px;
+        background-color: #1D1F22;
+        color: white;
+        opacity: .7;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+      }
+
+      .left,
+      .right {
+        @extend %arrow-container;
+      }
+    }
+  }
+}
+
+// 'mini' size styles
+
+.mini-cart {
+  @extend %p-cart;
+  border: none;
+}
+
+.mini-details {
+  @extend %p-details;
+  width: 32%;
+}
+
+.mini-title {
+  @extend %p-title;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+.mini-subtitle {
+  @extend %p-subtitle;
+  font-size: 16px;
+}
+
+.mini-price {
+  @extend %p-price;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.mini-sizes {
+  @extend %p-sizes;
+
+  .mini-size {
+    @extend %p-size;
+    font-size: 10px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .disabled {
+    @extend %size-disabled;
+  }
+
+  .selected {
+    @extend %size-selected;
+  }
+
+}
+
+.mini-colors {
+  @extend %p-colors;
+  width: 50%;
+}
+
+.mini-color {
+  @extend %p-color;
+  width: 16px;
+  height: 16px;
+}
+
+.active {
+  @extend %active-color;
+}
+
+.mini-actions {
+  @extend %p-actions;
+  width: 68%;
+  justify-content: flex-start;
+
+  .controls {
+    @extend %p-controls;
+
+    .plus,
+    .minus {
+      @extend %operators;
+      width: 24px;
+      height: 24px;
+      font-size: 16px;
+    }
+
+  }
+
+  .mini-img {
+    @extend %p-img;
+    width: 100%;
+
+    img {
+      @extend %image;
+    }
+  }
+
+}

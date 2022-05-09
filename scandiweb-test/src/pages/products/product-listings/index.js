@@ -1,11 +1,16 @@
 import { Component } from "react";
+import { withRouter } from "react-router-dom";
 import "./styles/index.css";
 
 class Products extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    this.changeLink = this.changeLink.bind(this);
   }
+
+  changeLink = () => this.props.history.push("/product");
 
   render() {
     return (
@@ -14,7 +19,7 @@ class Products extends Component {
           <p>Category name</p>
         </div>
         <div className='product-listing'>
-          <div className='product-card'>
+          <div className='product-card' onClick={this.changeLink}>
             <div className='product'>
               <div>
                 <img src='./images/products/Product A.png' alt='' />
@@ -111,4 +116,4 @@ class Products extends Component {
   }
 }
 
-export default Products;
+export default withRouter(Products);

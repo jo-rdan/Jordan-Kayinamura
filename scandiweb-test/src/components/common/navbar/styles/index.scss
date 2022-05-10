@@ -29,12 +29,12 @@
   height: 32px;
   padding: 0 10px;
   display: flex;
-  
+
   a {
     text-decoration: none;
-    color: $accent-color;    
+    color: $accent-color;
   }
-  
+
 }
 
 .nav-actions {
@@ -42,16 +42,21 @@
   width: 7%;
   justify-content: space-around;
   margin: 0 10px;
+
   .currency-switch {
+    outline: none;
+
     span {
       margin: 0 5px;
     }
-    &:hover {
-      .dropdown {
-        display: flex;
-      }
-    }
+
+    // &:hover {
+    //   .dropdown {
+    //     display: flex;
+    //   }
+    // }
   }
+
   .badge {
     background-color: $accent-color;
     color: white;
@@ -70,14 +75,13 @@
   .dropdown {
     width: 100px;
     position: absolute;
-    right: 40px;
+    right: 60px;
     top: 60px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    // @include shadow(2px, 2px, 20px, 8px, #dbd6d633);
     box-shadow: $box-shadow;
-    display: none;
+    background-color: white;
 
     .dropdown-items {
       width: 100%;
@@ -85,6 +89,7 @@
       margin: 10px;
       display: flex;
       justify-content: center;
+
       &:hover {
         background-color: #EEEEEE;
       }

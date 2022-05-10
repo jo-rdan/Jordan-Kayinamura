@@ -49,14 +49,12 @@
   margin: 0 10px;
 }
 
-.nav-actions .currency-switch span {
-  margin: 0 5px;
+.nav-actions .currency-switch {
+  outline: none;
 }
 
-.nav-actions .currency-switch:hover .dropdown {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+.nav-actions .currency-switch span {
+  margin: 0 5px;
 }
 
 .nav-actions .badge {
@@ -83,7 +81,7 @@
 .nav-actions .dropdown {
   width: 100px;
   position: absolute;
-  right: 40px;
+  right: 60px;
   top: 60px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -97,7 +95,7 @@
           align-items: center;
   -webkit-box-shadow: 2px 2px 20px 8px #a8acb030;
           box-shadow: 2px 2px 20px 8px #a8acb030;
-  display: none;
+  background-color: white;
 }
 
 .nav-actions .dropdown .dropdown-items {

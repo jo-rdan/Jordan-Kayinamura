@@ -8,7 +8,9 @@ class App extends Component {
   render() {
     return (
       <>
-        <NavBar />
+        <div>
+          <NavBar />
+        </div>
         <Switch>
           <Route path='/product'>
             <Product />

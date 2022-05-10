@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "react-apollo";
 import "./styles/index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -9,11 +11,17 @@ import store from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
+const client = new ApolloClient({
+  uri: `${process.env.REACT_APP_BE_URI}`,
+});
+
 root.render(
   // <React.StrictMode>
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>
     </BrowserRouter>
   </Provider>
   // </React.StrictMode>

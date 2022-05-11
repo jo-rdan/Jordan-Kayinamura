@@ -1,7 +1,7 @@
 import { CHANGE_CURRENCY_SYMBOL } from "../../actions";
 
 const initState = {
-  symbol: "",
+  symbol: "$",
 };
 
 const currencySwitcherReducer = (state = initState, action) => {

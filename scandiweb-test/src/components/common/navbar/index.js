@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { graphql } from "react-apollo";
 import { compose } from "redux";
 import { changeCurrencySymbol } from "../../../redux/actions/currency-switcher/currencySwitcher";
+import { getProductsByCategory } from "../../../redux/actions/products-actions/productsActions";
 import { getCategories, getCurrencies } from "./utils/queries";
 import "./styles/index.css";
 import { connect } from "react-redux";
@@ -15,17 +16,12 @@ class NavBar extends Component {
     };
 
     this.handleShowCurrencies = this.handleShowCurrencies.bind(this);
-    this.changeCurrency = this.changeCurrency.bind(this);
   }
 
   handleShowCurrencies = (e) => {
     this.setState({
       showCurrencies: e.type === "blur" ? false : !this.state.showCurrencies,
     });
-  };
-
-  changeCurrency = (symbol) => {
-    this.props.changeCurrencySymbol(symbol);
   };
 
   render() {
@@ -36,11 +32,12 @@ class NavBar extends Component {
             <li className={`nav-item`} key={category.name}>
               <NavLink
                 exact={true}
-                to={`/${category.name}` || "/all"}
+                to={`/${category.name}`}
                 activeStyle={{
                   borderBottom: "2px solid #5ECE7B",
                   color: "#5ECE7B",
                 }}
+                onClick={() => this.props.getProductsByCategory(category.name)}
               >
                 {category.name.toUpperCase()}
               </NavLink>
@@ -57,7 +54,7 @@ class NavBar extends Component {
             onBlur={this.handleShowCurrencies}
             tabIndex='1'
           >
-            {this.props.currencySymbol || "$"}
+            {this.props.currencySymbol}
             <span>
               <img src='./images/arrow.png' alt='' />
             </span>
@@ -67,7 +64,9 @@ class NavBar extends Component {
                   <div
                     key={currency.symbol}
                     className={"dropdown-items"}
-                    onClick={() => this.changeCurrency(currency.symbol)}
+                    onClick={() =>
+                      this.props.changeCurrencySymbol(currency.symbol)
+                    }
                   >{`${currency.symbol} ${currency.label}`}</div>
                 ))}
               </div>
@@ -90,7 +89,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default compose(
-  connect(mapStateToProps, { changeCurrencySymbol }),
+  connect(mapStateToProps, { changeCurrencySymbol, getProductsByCategory }),
   graphql(getCategories, { name: "categoriesData" }),
   graphql(getCurrencies, { name: "currenciesData" })
 )(NavBar);

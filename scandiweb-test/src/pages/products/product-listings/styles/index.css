@@ -44,8 +44,8 @@
 .product-listing .product-card .product-img {
   width: 350px;
   height: 350px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .product-listing .product-card:hover {

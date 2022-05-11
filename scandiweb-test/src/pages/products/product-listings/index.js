@@ -11,13 +11,12 @@ class Products extends Component {
     super(props);
     this.state = {};
 
-    this.changeLink = this.changeLink.bind(this);
+    this.navigateToProduct = this.navigateToProduct.bind(this);
   }
 
-  changeLink = () => this.props.history.push("/product");
+  navigateToProduct = (id) => this.props.history.push(`/product/${id}`);
 
   render() {
-    console.log(this.props.data);
     return (
       <div className='product-container'>
         <div className='product-category'>
@@ -27,7 +26,11 @@ class Products extends Component {
           {this.props?.data?.category?.products.map((product) => (
             <div
               className={`product-card ${!product.inStock ? "out-stock" : ""}`}
-              onClick={this.changeLink}
+              onClick={
+                product.inStock
+                  ? () => this.navigateToProduct(product.id)
+                  : null
+              }
               key={product.id}
             >
               {!product.inStock ? (

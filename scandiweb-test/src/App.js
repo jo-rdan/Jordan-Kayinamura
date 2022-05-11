@@ -12,7 +12,7 @@ class App extends Component {
           <NavBar />
         </div>
         <Switch>
-          <Route path='/product'>
+          <Route path='/product/:id'>
             <Product />
           </Route>
           <Route path='/'>

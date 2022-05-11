@@ -9,30 +9,13 @@ import { connect } from "react-redux";
 class Product extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selected: "",
-      selectedColor: "",
-      selectedImg: "",
-    };
+    this.state = {};
 
     this.selector = this.selector.bind(this);
   }
 
   selector = (type, item) => {
-    switch (type) {
-      case "color":
-        return this.setState({
-          selectedColor: item,
-        });
-
-      case "image":
-        return this.setState({ selectedImg: item });
-
-      default:
-        return this.setState({
-          selected: item,
-        });
-    }
+    return this.setState({ [type]: item });
   };
 
   render() {
@@ -58,7 +41,7 @@ class Product extends Component {
               <div className='product-img'>
                 <img
                   src={
-                    this.state.selectedImg ||
+                    this.state.image ||
                     this.props.productData.product.gallery[0]
                   }
                   alt=''
@@ -68,10 +51,10 @@ class Product extends Component {
             <div className='product-info'>
               <div className='product-details'>
                 <div className='title'>
-                  {this.props.productData.product.brand}
+                  {this.props.productData.product.name}
                 </div>
                 <div className='subtitle'>
-                  {this.props.productData.product.name}
+                  {this.props.productData.product.brand}
                 </div>
               </div>
               {this.props.productData.product.attributes.map((attribute) => {
@@ -87,11 +70,13 @@ class Product extends Component {
                             <>
                               <div
                                 className={`size ${
-                                  item.id === this.state.selected
+                                  item.id === this.state[attribute.name]
                                     ? "selected"
                                     : ""
                                 }`}
-                                onClick={() => this.selector(null, item.id)}
+                                onClick={() =>
+                                  this.setState({ [attribute.name]: item.id })
+                                }
                               >
                                 {item.value}
                               </div>
@@ -103,15 +88,15 @@ class Product extends Component {
                   case "swatch":
                     return (
                       <div className='product-color' key={attribute.id}>
-                        <h5 className='color-label'>{attribute.name}: </h5>
+                        <h5 className='color-label'>
+                          {attribute.name.toUpperCase()}:{" "}
+                        </h5>
                         <div className='color-options'>
                           {attribute.items.map((item) => (
                             <>
                               <div
                                 className={`color ${
-                                  item.id === this.state.selectedColor
-                                    ? "selected"
-                                    : ""
+                                  item.id === this.state.color ? "selected" : ""
                                 }`}
                                 style={{ backgroundColor: item.value }}
                                 onClick={() => this.selector("color", item.id)}
@@ -122,36 +107,7 @@ class Product extends Component {
                       </div>
                     );
                   default:
-                    return (
-                      <div key={attribute.id}>
-                        <div className='product-size'>
-                          <h5 className='size-label'>SIZE: </h5>
-                          <div className='size-options'>
-                            {attribute.items.map((item) => (
-                              <>
-                                <div className='size' key={item.id}>
-                                  {item.value}
-                                </div>
-                              </>
-                            ))}
-                          </div>
-                        </div>
-                        <div className='product-color'>
-                          <h5 className='color-label'>COLOR: </h5>
-                          <div className='color-options'>
-                            {attribute.items.map((item) => (
-                              <>
-                                <div
-                                  className='color'
-                                  style={{ backgroundColor: item.value }}
-                                  key={item.id}
-                                ></div>
-                              </>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    );
+                    return null;
                 }
               })}
 

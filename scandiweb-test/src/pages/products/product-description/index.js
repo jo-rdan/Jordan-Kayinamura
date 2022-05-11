@@ -1,65 +1,197 @@
 import { Component } from "react";
+import { graphql } from "react-apollo";
+import { getProduct } from "./utils/query";
 import "./styles/index.css";
+import { withRouter } from "react-router-dom";
+import { compose } from "redux";
+import { connect } from "react-redux";
 
 class Product extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: "",
+      selectedColor: "",
+      selectedImg: "",
+    };
+
+    this.selector = this.selector.bind(this);
+  }
+
+  selector = (type, item) => {
+    switch (type) {
+      case "color":
+        return this.setState({
+          selectedColor: item,
+        });
+
+      case "image":
+        return this.setState({ selectedImg: item });
+
+      default:
+        return this.setState({
+          selected: item,
+        });
+    }
+  };
+
   render() {
     return (
       <div className='container'>
-        <div className='product-graphics'>
-          {/* 1  */}
-          <div className='thumbnails'>
-            {/* thumbnails */}
-            <div className='thumb'>
-              <img src='./images/products/Product D.png' alt='' />
+        {this.props?.productData?.product ? (
+          <>
+            <div className='product-graphics'>
+              {/* 1  */}
+              <div className='thumbnails'>
+                {/* thumbnails */}
+                {this.props.productData.product.gallery.map((image) => (
+                  <div
+                    className='thumb'
+                    key={image}
+                    onClick={() => this.selector("image", image)}
+                  >
+                    <img src={image} alt='' className='product-image' />
+                  </div>
+                ))}
+              </div>
+              {/* product image */}
+              <div className='product-img'>
+                <img
+                  src={
+                    this.state.selectedImg ||
+                    this.props.productData.product.gallery[0]
+                  }
+                  alt=''
+                />
+              </div>
             </div>
-            <div className='thumb'>
-              <img src='./images/products/Product D.png' alt='' />
+            <div className='product-info'>
+              <div className='product-details'>
+                <div className='title'>
+                  {this.props.productData.product.brand}
+                </div>
+                <div className='subtitle'>
+                  {this.props.productData.product.name}
+                </div>
+              </div>
+              {this.props.productData.product.attributes.map((attribute) => {
+                switch (attribute.type) {
+                  case "text":
+                    return (
+                      <div className='product-size' key={attribute.id}>
+                        <h5 className='size-label'>
+                          {attribute.name.toUpperCase()}:{" "}
+                        </h5>
+                        <div className='size-options'>
+                          {attribute.items.map((item) => (
+                            <>
+                              <div
+                                className={`size ${
+                                  item.id === this.state.selected
+                                    ? "selected"
+                                    : ""
+                                }`}
+                                onClick={() => this.selector(null, item.id)}
+                              >
+                                {item.value}
+                              </div>
+                            </>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  case "swatch":
+                    return (
+                      <div className='product-color' key={attribute.id}>
+                        <h5 className='color-label'>{attribute.name}: </h5>
+                        <div className='color-options'>
+                          {attribute.items.map((item) => (
+                            <>
+                              <div
+                                className={`color ${
+                                  item.id === this.state.selectedColor
+                                    ? "selected"
+                                    : ""
+                                }`}
+                                style={{ backgroundColor: item.value }}
+                                onClick={() => this.selector("color", item.id)}
+                              ></div>
+                            </>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  default:
+                    return (
+                      <div key={attribute.id}>
+                        <div className='product-size'>
+                          <h5 className='size-label'>SIZE: </h5>
+                          <div className='size-options'>
+                            {attribute.items.map((item) => (
+                              <>
+                                <div className='size' key={item.id}>
+                                  {item.value}
+                                </div>
+                              </>
+                            ))}
+                          </div>
+                        </div>
+                        <div className='product-color'>
+                          <h5 className='color-label'>COLOR: </h5>
+                          <div className='color-options'>
+                            {attribute.items.map((item) => (
+                              <>
+                                <div
+                                  className='color'
+                                  style={{ backgroundColor: item.value }}
+                                  key={item.id}
+                                ></div>
+                              </>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                }
+              })}
+
+              <div className='product-price'>
+                <h5 className='price-label'>PRICE: </h5>
+                <p className='price'>
+                  {this.props.productData.product.prices
+                    .filter(
+                      (price) =>
+                        this.props.currencySymbol === price.currency.symbol
+                    )
+                    .map((price) => `${price.currency.symbol}${price.amount}`)}
+                </p>
+              </div>
+              <button className='action-btn'>Add to Cart</button>
+              <div>
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: this.props.productData.product.description,
+                  }}
+                ></p>
+              </div>
             </div>
-            <div className='thumb'>
-              <img src='./images/products/Product D.png' alt='' />
-            </div>
-          </div>
-          {/* product image */}
-          <div className='product-img'>
-            <img src='./images/products/Product D.png' alt='' />
-          </div>
-        </div>
-        <div className='product-info'>
-          <div className='product-details'>
-            <div className='title'>Title</div>
-            <div className='subtitle'>SubTitle</div>
-          </div>
-          <div className='product-size'>
-            <h5 className='size-label'>SIZE: </h5>
-            <div className='size-options'>
-              <div className='size disabled'>XS</div>
-              <div className='size selected'>S</div>
-              <div className='size'>M</div>
-              <div className='size'>L</div>
-            </div>
-          </div>
-          <div className='product-color'>
-            <h5 className='color-label'>COLOR: </h5>
-            <div className='color-options'>
-              <div className='color blue active'></div>
-              <div className='color yellow'></div>
-              <div className='color green'></div>
-            </div>
-          </div>
-          <div className='product-price'>
-            <h5 className='price-label'>PRICE: </h5>
-            <p className='price'>$50.00</p>
-          </div>
-          {/* <div className="action-btn"> */}
-          <button className='action-btn'>Add to Cart</button>
-          {/* </div> */}
-          <div>
-            <p>Description</p>
-          </div>
-        </div>
+          </>
+        ) : null}
       </div>
     );
   }
 }
 
-export default Product;
+const mapStateToProps = (state) => ({
+  selectedCategory: state.categoryToFilter.category,
+  currencySymbol: state.currencySwitcher.symbol,
+});
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps),
+  graphql(getProduct, {
+    name: "productData",
+    options: ({ match }) => ({ variables: { id: match.params.id } }),
+  })
+)(Product);

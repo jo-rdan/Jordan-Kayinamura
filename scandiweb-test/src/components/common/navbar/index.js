@@ -5,8 +5,8 @@ import { compose } from "redux";
 import { changeCurrencySymbol } from "../../../redux/actions/currency-switcher/currencySwitcher";
 import { getProductsByCategory } from "../../../redux/actions/products-actions/productsActions";
 import { getCategories, getCurrencies } from "./utils/queries";
-import "./styles/index.css";
 import { connect } from "react-redux";
+import "./styles/index.css";
 
 class NavBar extends Component {
   constructor(props) {
@@ -45,7 +45,7 @@ class NavBar extends Component {
           ))}
         </ul>
         <div className='logo'>
-          <img src='./images/logo.png' alt='logo' />
+          <img src={`${process.env.PUBLIC_URL}/images/logo.png`} alt='logo' />
         </div>
         <div className='nav-actions'>
           <div
@@ -56,7 +56,7 @@ class NavBar extends Component {
           >
             {this.props.currencySymbol}
             <span>
-              <img src='./images/arrow.png' alt='' />
+              <img src={`${process.env.PUBLIC_URL}/images/arrow.png`} alt='' />
             </span>
             {this.state.showCurrencies ? (
               <div className='dropdown' ref='currency-dpd'>
@@ -73,7 +73,7 @@ class NavBar extends Component {
             ) : null}
           </div>
           <div className='cart-icon'>
-            <img src='./images/cart.png' alt='' />
+            <img src={`${process.env.PUBLIC_URL}/images/cart.png`} alt='' />
             <div className='badge'>
               <span>3</span>
             </div>

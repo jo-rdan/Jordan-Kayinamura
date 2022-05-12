@@ -5,6 +5,7 @@ import "./styles/index.css";
 import { getProductsByCategoryQuery } from "./utils/queries";
 import { compose } from "redux";
 import { connect } from "react-redux";
+import { addToCart } from "../../../redux/actions/products-actions/productDescActions";
 
 class Products extends Component {
   constructor(props) {
@@ -26,11 +27,6 @@ class Products extends Component {
           {this.props?.data?.category?.products.map((product) => (
             <div
               className={`product-card ${!product.inStock ? "out-stock" : ""}`}
-              onClick={
-                product.inStock
-                  ? () => this.navigateToProduct(product.id)
-                  : null
-              }
               key={product.id}
             >
               {!product.inStock ? (
@@ -47,12 +43,32 @@ class Products extends Component {
                     alt=''
                     className='product-img'
                   />
-                  <span className='cart-hover'>
+                  <span
+                    className='cart-hover'
+                    onClick={() =>
+                      product.attributes.length <= 0 && product.inStock
+                        ? this.props.addToCart({
+                            ...product,
+                            selectedArgs: this.state,
+                            quantity: 1,
+                          })
+                        : null
+                    }
+                  >
                     <img src='./images/cart_hover.png' alt='' />
                   </span>
                 </div>
                 <div>
-                  <div className='product-name'>{product.name}</div>
+                  <div
+                    className='product-name'
+                    onClick={
+                      product.inStock
+                        ? () => this.navigateToProduct(product.id)
+                        : null
+                    }
+                  >
+                    {product.name}
+                  </div>
                   <div className='product-price'>
                     {product.prices
                       .filter(
@@ -80,7 +96,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, { addToCart }),
   graphql(getProductsByCategoryQuery, {
     name: "data",
     options: (props) => ({

@@ -5,6 +5,7 @@ import "./styles/index.css";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { connect } from "react-redux";
+import { addToCart } from "../../../redux/actions/products-actions/productDescActions";
 
 class Product extends Component {
   constructor(props) {
@@ -70,12 +71,14 @@ class Product extends Component {
                             <>
                               <div
                                 className={`size ${
-                                  item.id === this.state[attribute.name]
+                                  item.value === this.state[attribute.name]
                                     ? "selected"
                                     : ""
                                 }`}
                                 onClick={() =>
-                                  this.setState({ [attribute.name]: item.id })
+                                  this.setState({
+                                    [attribute.name]: item.value,
+                                  })
                                 }
                               >
                                 {item.value}
@@ -96,10 +99,14 @@ class Product extends Component {
                             <>
                               <div
                                 className={`color ${
-                                  item.id === this.state.color ? "selected" : ""
+                                  item.value === this.state.color
+                                    ? "selected"
+                                    : ""
                                 }`}
                                 style={{ backgroundColor: item.value }}
-                                onClick={() => this.selector("color", item.id)}
+                                onClick={() =>
+                                  this.selector("color", item.value)
+                                }
                               ></div>
                             </>
                           ))}
@@ -122,7 +129,18 @@ class Product extends Component {
                     .map((price) => `${price.currency.symbol}${price.amount}`)}
                 </p>
               </div>
-              <button className='action-btn'>Add to Cart</button>
+              <button
+                className='action-btn'
+                onClick={() =>
+                  this.props.addToCart({
+                    ...this.props.productData.product,
+                    selectedArgs: this.state,
+                    quantity: 1,
+                  })
+                }
+              >
+                Add to Cart
+              </button>
               <div>
                 <p
                   dangerouslySetInnerHTML={{
@@ -145,7 +163,7 @@ const mapStateToProps = (state) => ({
 
 export default compose(
   withRouter,
-  connect(mapStateToProps),
+  connect(mapStateToProps, { addToCart }),
   graphql(getProduct, {
     name: "productData",
     options: ({ match }) => ({ variables: { id: match.params.id } }),

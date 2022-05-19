@@ -2,6 +2,8 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -11,7 +13,7 @@
 }
 
 .product-details, .mini-details {
-  width: 25%;
+  width: 45%;
 }
 
 .product-details .products-title, .mini-title {
@@ -37,9 +39,6 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
 }
 
 .product-details .products-sizes .products-size, .mini-sizes .mini-size {
@@ -69,13 +68,10 @@
 }
 
 .product-details .products-colors, .mini-colors {
-  width: 40%;
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -146,7 +142,6 @@
 }
 
 .products-actions .product-img, .mini-actions .mini-img {
-  background-color: blueviolet;
   width: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -158,20 +153,44 @@
   justify-self: flex-end;
 }
 
-.blue {
-  background-color: #696985;
+.close-btn {
+  background-color: black;
+  width: 1%;
+  height: 10px;
+  padding: 10px;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
 }
 
-.yellow {
-  background-color: yellow;
+.empty-msg {
+  font-weight: 300;
+  color: lightgray;
+  text-align: center;
 }
 
-.green {
-  background-color: green;
+.product-details .products-sizes {
+  gap: 15px;
+}
+
+.product-details .products-colors {
+  gap: 15px;
 }
 
 .products-actions .product-img img {
   height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: center center;
+     object-position: center center;
 }
 
 .products-actions .product-img .carousel {
@@ -208,6 +227,11 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.close-btn p {
+  color: white;
+  font-weight: 100;
 }
 
 .mini-cart {

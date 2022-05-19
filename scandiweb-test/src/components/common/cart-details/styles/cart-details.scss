@@ -24,6 +24,7 @@
 
   .products-sizes {
     @extend %p-sizes;
+    gap: 15px;
 
     .products-size {
       @extend %p-size;
@@ -40,6 +41,7 @@
 
   .products-colors {
     @extend %p-colors;
+    gap: 15px;
 
     .products-color {
       @extend %p-color;
@@ -71,6 +73,8 @@
     img {
       @extend %image;
       height: 100%;
+      object-fit: contain;
+      object-position: center center;
     }
 
     .carousel {
@@ -103,6 +107,19 @@
         @extend %arrow-container;
       }
     }
+  }
+}
+
+.empty-msg {
+  @extend %empty;
+}
+
+.close-btn {
+  @extend %close;
+
+  p {
+    color: white;
+    font-weight: 100;
   }
 }
 

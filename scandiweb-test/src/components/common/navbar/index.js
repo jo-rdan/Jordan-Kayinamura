@@ -7,6 +7,7 @@ import { getProductsByCategory } from "../../../redux/actions/products-actions/p
 import { getCategories, getCurrencies } from "./utils/queries";
 import { connect } from "react-redux";
 import "./styles/index.css";
+import { withRouter } from "react-router-dom";
 
 class NavBar extends Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class NavBar extends Component {
                 activeStyle={{
                   borderBottom: "2px solid #5ECE7B",
                   color: "#5ECE7B",
+                  outline: "none",
                 }}
                 onClick={() => this.props.getProductsByCategory(category.name)}
               >
@@ -72,11 +74,16 @@ class NavBar extends Component {
               </div>
             ) : null}
           </div>
-          <div className='cart-icon'>
+          <div
+            className='cart-icon'
+            onClick={() => this.props.history.push("/cart")}
+          >
             <img src={`${process.env.PUBLIC_URL}/images/cart.png`} alt='' />
-            <div className='badge'>
-              <span>3</span>
-            </div>
+            {this.props.items.length > 0 ? (
+              <div className='badge'>
+                <span>{this.props.items.length}</span>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
@@ -86,9 +93,11 @@ class NavBar extends Component {
 
 const mapStateToProps = (state) => ({
   currencySymbol: state.currencySwitcher.symbol,
+  items: state.cartItems.items,
 });
 
 export default compose(
+  withRouter,
   connect(mapStateToProps, { changeCurrencySymbol, getProductsByCategory }),
   graphql(getCategories, { name: "categoriesData" }),
   graphql(getCurrencies, { name: "currenciesData" })

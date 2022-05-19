@@ -4,6 +4,7 @@
 
 %p-cart {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   border-top: 1px solid #E5E5E5;
   border-bottom: 1px solid #E5E5E5;
@@ -11,7 +12,7 @@
 }
 
 %p-details {
-  width: 25%;
+  width: 45%;
 }
 
 %p-title {
@@ -35,7 +36,6 @@
 %p-sizes {
   width: 100%;
   display: flex;
-  justify-content: space-between;
 }
 
 %p-size {
@@ -59,9 +59,8 @@
 }
 
 %p-colors {
-  width: 40%;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
@@ -105,7 +104,6 @@
 }
 
 %p-img {
-  background-color: blueviolet;
   width: 50%;
   display: flex;
 }
@@ -115,15 +113,24 @@
   justify-self: flex-end;
 }
 
+// close btn
+
+%close {
+  background-color: black;
+  width: 1%;
+  height: 10px;
+  padding: 10px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  // display: none;
+}
+
 // common classes
-.blue {
-  background-color: rgb(105, 105, 133);
-}
-
-.yellow {
-  background-color: yellow;
-}
-
-.green {
-  background-color: green;
+%empty {
+  font-weight: 300;
+  color: lightgray;
+  text-align: center;
 }

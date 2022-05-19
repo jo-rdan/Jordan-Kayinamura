@@ -8,6 +8,16 @@ export const getProductsByCategoryQuery = gql`
         id
         name
         inStock
+        attributes {
+          id
+          name
+          type
+          items {
+            id
+            displayValue
+            value
+          }
+        }
         prices {
           currency {
             symbol

@@ -26,7 +26,8 @@
   gap: 13px;
 
   .out-stock {
-    // opacity: .5;
+    opacity: .5;
+
   }
 
   .product-card {
@@ -44,7 +45,6 @@
       box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
 
       .product {
-
         .cart-hover {
           display: block;
           position: relative;
@@ -96,7 +96,6 @@
 
       .cart-hover {
         display: none;
-
       }
     }
   }

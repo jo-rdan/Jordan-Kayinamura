@@ -4,6 +4,7 @@ import {
   REMOVE_FROM_CART,
   NEXT_IMAGE,
   PREV_IMAGE,
+  OPEN_CART,
 } from "../index";
 
 export const changeQuantity = (operation, itemId) => (dispatch) => {
@@ -30,3 +31,5 @@ export const nextImage = (data) => (dispatch) => {
 export const removeProduct = (currentItem) => (dispatch) => {
   return dispatch({ type: REMOVE_FROM_CART, payload: currentItem });
 };
+
+export const openCart = () => (dispatch) => dispatch({ type: OPEN_CART });

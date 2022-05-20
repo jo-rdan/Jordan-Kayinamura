@@ -153,7 +153,7 @@
   justify-self: flex-end;
 }
 
-.close-btn {
+.products-close, .mini-close {
   background-color: black;
   width: 1%;
   height: 10px;
@@ -227,9 +227,10 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  cursor: pointer;
 }
 
-.close-btn p {
+.products-close p {
   color: white;
   font-weight: 100;
 }
@@ -256,6 +257,10 @@
   font-size: 16px;
 }
 
+.mini-sizes {
+  gap: 10px;
+}
+
 .mini-sizes .mini-size {
   font-size: 10px;
   width: 24px;
@@ -263,7 +268,8 @@
 }
 
 .mini-colors {
-  width: 50%;
+  width: 100%;
+  gap: 10px;
 }
 
 .mini-color {
@@ -272,7 +278,7 @@
 }
 
 .mini-actions {
-  width: 68%;
+  width: 60%;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
@@ -287,5 +293,15 @@
 
 .mini-actions .mini-img {
   width: 100%;
+}
+
+.mini-close {
+  width: 5px;
+  height: 5px;
+}
+
+.mini-close p {
+  color: white;
+  font-size: 12px;
 }
 /*# sourceMappingURL=cart-details.css.map */

@@ -32,6 +32,10 @@
   gap: 13px;
 }
 
+.product-listing .out-stock {
+  opacity: .5;
+}
+
 .product-listing .product-card {
   background-color: white;
   padding: 15px;

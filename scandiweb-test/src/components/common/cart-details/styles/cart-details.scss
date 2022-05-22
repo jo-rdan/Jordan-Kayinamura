@@ -99,6 +99,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        cursor: pointer;
 
       }
 
@@ -114,7 +115,7 @@
   @extend %empty;
 }
 
-.close-btn {
+.products-close {
   @extend %close;
 
   p {
@@ -122,6 +123,8 @@
     font-weight: 100;
   }
 }
+
+
 
 // 'mini' size styles
 
@@ -154,6 +157,7 @@
 
 .mini-sizes {
   @extend %p-sizes;
+  gap: 10px;
 
   .mini-size {
     @extend %p-size;
@@ -174,7 +178,8 @@
 
 .mini-colors {
   @extend %p-colors;
-  width: 50%;
+  width: 100%;
+  gap: 10px;
 }
 
 .mini-color {
@@ -189,7 +194,7 @@
 
 .mini-actions {
   @extend %p-actions;
-  width: 68%;
+  width: 60%;
   justify-content: flex-start;
 
   .controls {
@@ -213,5 +218,15 @@
       @extend %image;
     }
   }
+}
 
+.mini-close {
+  @extend %close;
+  width: 5px;
+  height: 5px;
+
+  p {
+    color: white;
+    font-size: 12px;
+  }
 }

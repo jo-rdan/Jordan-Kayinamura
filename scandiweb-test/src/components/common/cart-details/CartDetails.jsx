@@ -51,8 +51,8 @@ class CartDetails extends Component {
                       )
                       .map(
                         (price) =>
-                          `${price.currency.symbol}${price.amount * product.quantity
-                          }`
+                          `${price.currency.symbol}${(price.amount * product.quantity
+                          ).toFixed(2)}`
                       )}
                   </p>
 
@@ -138,7 +138,7 @@ class CartDetails extends Component {
                   <div className='controls'>
                     <div
                       className='plus'
-                      onClick={() => this.props.changeQuantity("+", product.id)}
+                      onClick={() => this.props.changeQuantity("+", product)}
                     >
                       +
                     </div>
@@ -147,7 +147,7 @@ class CartDetails extends Component {
                       className='minus'
                       onClick={() =>
                         product.quantity > 1 &&
-                        this.props.changeQuantity("-", product.id)
+                        this.props.changeQuantity("-", product)
                       }
                     >
                       -
@@ -172,7 +172,8 @@ class CartDetails extends Component {
                   </div>
                 </div>
                 <div
-                  className='close-btn'
+                  className={`${this.props.size === "normal" ? "products" : "mini"
+                    }-close`}
                   onClick={() => this.props.removeProduct(product)}
                 >
                   <p>x</p>

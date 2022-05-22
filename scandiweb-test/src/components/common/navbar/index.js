@@ -4,6 +4,7 @@ import { graphql } from "react-apollo";
 import { compose } from "redux";
 import { changeCurrencySymbol } from "../../../redux/actions/currency-switcher/currencySwitcher";
 import { getProductsByCategory } from "../../../redux/actions/products-actions/productsActions";
+import { openCart } from "../../../redux/actions/cart/cartActions";
 import { getCategories, getCurrencies } from "./utils/queries";
 import { connect } from "react-redux";
 import "./styles/index.css";
@@ -33,12 +34,8 @@ class NavBar extends Component {
             <li className={`nav-item`} key={category.name}>
               <NavLink
                 exact={true}
-                to={`/${category.name}`}
-                activeStyle={{
-                  borderBottom: "2px solid #5ECE7B",
-                  color: "#5ECE7B",
-                  outline: "none",
-                }}
+                to={`/${category.name === "all" ? "" : category.name}`}
+                activeClassName={`active-item`}
                 onClick={() => this.props.getProductsByCategory(category.name)}
               >
                 {category.name.toUpperCase()}
@@ -61,11 +58,15 @@ class NavBar extends Component {
               <img src={`${process.env.PUBLIC_URL}/images/arrow.png`} alt='' />
             </span>
             {this.state.showCurrencies ? (
-              <div className='dropdown' ref='currency-dpd'>
+              <div className='dropdown'>
                 {this.props.currenciesData?.currencies?.map((currency) => (
                   <div
                     key={currency.symbol}
-                    className={"dropdown-items"}
+                    className={`dropdown-items ${
+                      this.props.currencySymbol === currency.symbol
+                        ? "selected"
+                        : ""
+                    }`}
                     onClick={() =>
                       this.props.changeCurrencySymbol(currency.symbol)
                     }
@@ -76,12 +77,23 @@ class NavBar extends Component {
           </div>
           <div
             className='cart-icon'
-            onClick={() => this.props.history.push("/cart")}
+            onClick={() => this.props.openCart()}
+            onBlur={() => this.props.openCart()}
+            tabIndex={"1"}
           >
             <img src={`${process.env.PUBLIC_URL}/images/cart.png`} alt='' />
             {this.props.items.length > 0 ? (
               <div className='badge'>
-                <span>{this.props.items.length}</span>
+                <span>
+                  {
+                    this.props.items.reduce(
+                      (acc, curr) => ({
+                        quantity: acc.quantity + curr.quantity,
+                      }),
+                      { quantity: 0 }
+                    ).quantity
+                  }
+                </span>
               </div>
             ) : null}
           </div>
@@ -98,7 +110,11 @@ const mapStateToProps = (state) => ({
 
 export default compose(
   withRouter,
-  connect(mapStateToProps, { changeCurrencySymbol, getProductsByCategory }),
+  connect(mapStateToProps, {
+    changeCurrencySymbol,
+    getProductsByCategory,
+    openCart,
+  }),
   graphql(getCategories, { name: "categoriesData" }),
   graphql(getCurrencies, { name: "currenciesData" })
 )(NavBar);

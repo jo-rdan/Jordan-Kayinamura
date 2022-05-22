@@ -10,13 +10,15 @@ import { addToCart } from "../../../redux/actions/products-actions/productDescAc
 class Product extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      disable: true,
+    };
 
     this.selector = this.selector.bind(this);
   }
 
   selector = (type, item) => {
-    return this.setState({ [type]: item });
+    return this.setState({ disable: false, [type]: item });
   };
 
   render() {
@@ -30,7 +32,9 @@ class Product extends Component {
                 {/* thumbnails */}
                 {this.props.productData.product.gallery.map((image) => (
                   <div
-                    className='thumb'
+                    className={`thumb ${
+                      this.state?.image === image ? "active" : ""
+                    }`}
                     key={image}
                     onClick={() => this.selector("image", image)}
                   >
@@ -77,6 +81,7 @@ class Product extends Component {
                                 }`}
                                 onClick={() =>
                                   this.setState({
+                                    disable: false,
                                     [attribute.name]: item.value,
                                   })
                                 }
@@ -130,7 +135,9 @@ class Product extends Component {
                 </p>
               </div>
               <button
-                className='action-btn'
+                type='button'
+                className={`action-btn ${this.state.disable ? "disabled" : ""}`}
+                disabled={this.state.disable}
                 onClick={() =>
                   this.props.addToCart({
                     ...this.props.productData.product,

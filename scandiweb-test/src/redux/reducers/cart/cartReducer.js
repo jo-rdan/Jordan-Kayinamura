@@ -5,12 +5,14 @@ import {
   REMOVE_FROM_CART,
   PREV_IMAGE,
   NEXT_IMAGE,
+  OPEN_CART,
 } from "../../actions";
 
 const initState = {
   items: [],
   currentIndex: 0,
   currentId: "",
+  openCart: false,
 };
 
 const cartReducer = (state = initState, { type, payload }) => {
@@ -23,7 +25,12 @@ const cartReducer = (state = initState, { type, payload }) => {
         ...state,
         items: state.items.map((item) => ({
           ...item,
-          quantity: item.id === payload ? item.quantity + 1 : item.quantity,
+          quantity:
+            item.id === payload ||
+            JSON.stringify(item.selectedArgs) ===
+              JSON.stringify(payload.selectedArgs)
+              ? item.quantity + 1
+              : item.quantity,
         })),
       };
 
@@ -32,7 +39,12 @@ const cartReducer = (state = initState, { type, payload }) => {
         ...state,
         items: state.items.map((item) => ({
           ...item,
-          quantity: item.id === payload ? item.quantity - 1 : item.quantity,
+          quantity:
+            item.id === payload ||
+            JSON.stringify(item.selectedArgs) ===
+              JSON.stringify(payload.selectedArgs)
+              ? item.quantity - 1
+              : item.quantity,
         })),
       };
 
@@ -62,6 +74,12 @@ const cartReducer = (state = initState, { type, payload }) => {
           state.currentIndex < payload.gallery.length - 1
             ? state.currentIndex + 1
             : 0,
+      };
+
+    case OPEN_CART:
+      return {
+        ...state,
+        openCart: !state.openCart,
       };
 
     default:

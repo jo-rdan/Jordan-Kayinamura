@@ -295,6 +295,11 @@
   width: 100%;
 }
 
+.mini-actions .mini-img img {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
 .mini-close {
   width: 5px;
   height: 5px;

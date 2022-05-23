@@ -6,7 +6,6 @@
 }
 
 .product-category {
-  font-family: $font-family;
 
   p {
     font-size: 42px;
@@ -20,9 +19,8 @@
   padding: 20px;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   flex-wrap: wrap;
-  flex-flow: row wrap;
-  justify-content: flex-start;
   gap: 13px;
 
   .out-stock {
@@ -83,13 +81,13 @@
       }
 
       .product-name {
-        font-weight: 300;
+        font-weight: 400;
         font-size: 20px;
         line-height: 160%;
       }
 
       .product-price {
-        font-weight: 500;
+        font-weight: 600;
         font-size: 20px;
         line-height: 160%;
       }

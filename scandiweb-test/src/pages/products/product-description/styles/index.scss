@@ -1,3 +1,5 @@
+@import '../../../../styles/variables.scss';
+
 .container {
   display: flex;
   justify-content: space-between;
@@ -106,6 +108,10 @@
       width: 32px;
       height: 32px;
       cursor: pointer;
+    }
+
+    .selected {
+      border: 1px solid $primary-color;
     }
   }
 

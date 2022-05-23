@@ -139,6 +139,10 @@
   cursor: pointer;
 }
 
+.product-info .color-options .selected {
+  border: 1px solid #5ECE7B;
+}
+
 .product-info .product-price .price {
   font-weight: 700;
   font-size: 24px;

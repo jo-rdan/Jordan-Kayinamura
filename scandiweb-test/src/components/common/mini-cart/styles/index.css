@@ -15,7 +15,7 @@
 
 .mini-container {
   margin: 0 50px;
-  width: 29%;
+  width: 30%;
   height: 2%;
   padding: 20px 16px;
   background-color: #fdfdfd;
@@ -58,5 +58,11 @@
   border: 2px solid #1D1F22;
   color: #1D1F22;
   font-weight: bold;
+}
+
+@media (max-width: 1024px) {
+  .mini-container {
+    width: 35%;
+  }
 }
 /*# sourceMappingURL=index.css.map */

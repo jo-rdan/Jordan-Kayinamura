@@ -12,13 +12,17 @@ class Product extends Component {
     super(props);
     this.state = {
       disable: true,
+      args: {},
     };
 
     this.selector = this.selector.bind(this);
   }
 
   selector = (type, item) => {
-    return this.setState({ disable: false, [type]: item });
+    return this.setState({
+      disable: false,
+      args: { ...this.state.args, [type]: item },
+    });
   };
 
   render() {
@@ -36,7 +40,7 @@ class Product extends Component {
                       this.state?.image === image ? "active" : ""
                     }`}
                     key={image}
-                    onClick={() => this.selector("image", image)}
+                    onClick={() => this.setState({ image })}
                   >
                     <img src={image} alt='' className='product-image' />
                   </div>
@@ -75,14 +79,17 @@ class Product extends Component {
                             <>
                               <div
                                 className={`size ${
-                                  item.value === this.state[attribute.name]
+                                  item.value === this.state.args[attribute.name]
                                     ? "selected"
                                     : ""
                                 }`}
                                 onClick={() =>
                                   this.setState({
                                     disable: false,
-                                    [attribute.name]: item.value,
+                                    args: {
+                                      ...this.state.args,
+                                      [attribute.name]: item.value,
+                                    },
                                   })
                                 }
                               >
@@ -104,7 +111,7 @@ class Product extends Component {
                             <>
                               <div
                                 className={`color ${
-                                  item.value === this.state.color
+                                  item.value === this.state.args.color
                                     ? "selected"
                                     : ""
                                 }`}
@@ -136,12 +143,24 @@ class Product extends Component {
               </div>
               <button
                 type='button'
-                className={`action-btn ${this.state.disable ? "disabled" : ""}`}
-                disabled={this.state.disable}
+                className={`action-btn ${
+                  this.state.disable &&
+                  this.props.productData.product.attributes.length > 0 &&
+                  this.props.productData.product.attributes.every(
+                    (attribute) =>
+                      !Object.keys(this.state.args).includes(attribute.name)
+                  )
+                    ? "disabled"
+                    : ""
+                }`}
+                disabled={
+                  this.state.disable &&
+                  this.props.productData.product.attributes.length > 0
+                }
                 onClick={() =>
                   this.props.addToCart({
                     ...this.props.productData.product,
-                    selectedArgs: this.state,
+                    selectedArgs: { ...this.state.args },
                     quantity: 1,
                   })
                 }

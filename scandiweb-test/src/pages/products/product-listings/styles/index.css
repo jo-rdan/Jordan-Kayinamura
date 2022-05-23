@@ -7,10 +7,11 @@
   font-weight: 400;
   color: #1D1F22;
   text-transform: capitalize;
+  padding: 10px 20px;
 }
 
 .product-listing {
-  padding: 20px;
+  padding: 20px 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

@@ -120,6 +120,7 @@
       -ms-flex-align: center;
           align-items: center;
   margin: 0 24px;
+  cursor: pointer;
 }
 
 .products-actions .controls .plus,

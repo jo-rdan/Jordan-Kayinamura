@@ -3,26 +3,24 @@ import "./styles/index.css";
 import CartDetails from "../cart-details/CartDetails";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { openCart } from "../../../redux/actions/cart/cartActions";
+import { checkout, openCart } from "../../../redux/actions/cart/cartActions";
 class Minicart extends Component {
   render() {
+    const { products, currencySymbol, checkout, openCart } = this.props;
     return (
       <div className='modal-bg'>
         <div className='mini-container'>
-          <h4>{`My Bag, ${this.props.products.length} item${
-            this.props.products.length > 1 ? "s" : ""
+          <h4>{`My Bag, ${products.length} item${
+            products.length > 1 ? "s" : ""
           }`}</h4>
           <CartDetails size='mini' />
           <div className='cart-footer'>
             <h4>
               Total:{" "}
-              <span>{`${this.props.currencySymbol}${this.props.products
+              <span>{`${currencySymbol}${products
                 .map((product) =>
                   product.prices
-                    .filter(
-                      (price) =>
-                        price.currency.symbol === this.props.currencySymbol
-                    )
+                    .filter((price) => price.currency.symbol === currencySymbol)
                     .map((p) => p.amount * product.quantity)
                 )
                 .flat(1)
@@ -30,11 +28,13 @@ class Minicart extends Component {
             </h4>
             <div className='cart-buttons'>
               <button className='cart-basic'>
-                <Link to={"/cart"} onClick={() => this.props.openCart()}>
+                <Link to={"/cart"} onClick={() => openCart()}>
                   View bag
                 </Link>
               </button>
-              <button className='cart-primary'>Checkout</button>
+              <button className='cart-primary' onClick={() => checkout()}>
+                Checkout
+              </button>
             </div>
           </div>
         </div>
@@ -48,4 +48,4 @@ const mapStateToProps = (state) => ({
   currencySymbol: state.currencySwitcher.symbol,
 });
 
-export default connect(mapStateToProps, { openCart })(Minicart);
+export default connect(mapStateToProps, { openCart, checkout })(Minicart);

@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 
 class SliderContent extends Component {
   render() {
-
+    const { content: { gallery }, active } = this.props;
     return (
       <>
-        {this.props.content.gallery.map((image, index) => {
-          return <img src={image} alt="" key={index} style={{ display: index === this.props.active ? 'flex' : 'none' }} />
+        {gallery.map((image, index) => {
+          return <img src={image} alt="" key={index} style={{ display: index === active ? 'flex' : 'none' }} />
         })}
       </>
     )

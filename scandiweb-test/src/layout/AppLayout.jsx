@@ -8,11 +8,12 @@ import Products from '../pages/products/product-listings';
 
 class AppLayout extends Component {
   render() {
+    const { openCart } = this.props;
     return (
       <>
-        {this.props.openCart ? <MiniCart /> : null}
+        {openCart ? <MiniCart /> : null}
         <Switch>
-          <Route path='/product/:id'>
+          <Route path='/:category/product/:id'>
             <Product />
           </Route>
           <Route path='/cart'>

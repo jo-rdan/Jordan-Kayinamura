@@ -9,3 +9,4 @@ export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const NEXT_IMAGE = "NEXT_IMAGE";
 export const PREV_IMAGE = "PREV_IMAGE";
 export const OPEN_CART = "OPEN_CART";
+export const CHECKOUT = "CHECKOUT";

@@ -2,7 +2,7 @@ import { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { graphql } from "react-apollo";
 import "./styles/index.css";
-import { getProductsByCategoryQuery } from "./utils/queries";
+import { getProductsByCategoryQuery } from "../../../utils/queries/product-listing";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { addToCart } from "../../../redux/actions/products-actions/productDescActions";
@@ -12,21 +12,24 @@ class Products extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-
-    this.navigateToProduct = this.navigateToProduct.bind(this);
   }
 
-  navigateToProduct = (id) => this.props.history.push(`/product/${id}`);
-
   render() {
+    const {
+      data: { category },
+      selectedCategory,
+      currencySymbol,
+      addToCart,
+      location: { pathname },
+    } = this.props;
     return (
       <>
         <div className='product-container'>
           <div className='product-category'>
-            <p>{this.props?.data?.category?.name}</p>
+            <p>{category?.name}</p>
           </div>
           <div className='product-listing'>
-            {this.props?.data?.category?.products.map((product) => (
+            {category?.products.map((product) => (
               <div
                 className={`product-card ${
                   !product.inStock ? "out-stock" : ""
@@ -43,7 +46,11 @@ class Products extends Component {
                 <div className='product'>
                   <div>
                     <Link
-                      to={product.inStock ? `/product/${product.id}` : null}
+                      to={
+                        product.inStock
+                          ? `/${selectedCategory}/product/${product.id}`
+                          : `${pathname}`
+                      }
                     >
                       <img
                         src={product.gallery[0]}
@@ -55,7 +62,7 @@ class Products extends Component {
                       className='cart-hover'
                       onClick={() =>
                         product.attributes.length <= 0 && product.inStock
-                          ? this.props.addToCart({
+                          ? addToCart({
                               ...product,
                               selectedArgs: this.state,
                               quantity: 1,
@@ -67,21 +74,11 @@ class Products extends Component {
                     </span>
                   </div>
                   <div>
-                    <div
-                      className='product-name'
-                      // onClick={
-                      //   product.inStock
-                      //     ? () => this.navigateToProduct(product.id)
-                      //     : null
-                      // }
-                    >
-                      {product.name}
-                    </div>
+                    <div className='product-name'>{product.name}</div>
                     <div className='product-price'>
                       {product.prices
                         .filter(
-                          (price) =>
-                            this.props.currencySymbol === price.currency.symbol
+                          (price) => currencySymbol === price.currency.symbol
                         )
                         .map(
                           (price) => `${price.currency.symbol}${price.amount}`
@@ -107,8 +104,8 @@ export default compose(
   connect(mapStateToProps, { addToCart }),
   graphql(getProductsByCategoryQuery, {
     name: "data",
-    options: (props) => ({
-      variables: { title: props.selectedCategory || "all" },
+    options: ({ selectedCategory }) => ({
+      variables: { title: selectedCategory || "all" },
     }),
   })
 )(withRouter(Products));

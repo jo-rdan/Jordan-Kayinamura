@@ -216,6 +216,7 @@
 
     img {
       @extend %image;
+      object-fit: contain;
     }
   }
 }

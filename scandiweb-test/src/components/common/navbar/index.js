@@ -78,7 +78,6 @@ class NavBar extends Component {
           <div
             className='cart-icon'
             onClick={() => this.props.openCart()}
-            onBlur={() => this.props.openCart()}
             tabIndex={"1"}
           >
             <img src={`${process.env.PUBLIC_URL}/images/cart.png`} alt='' />

@@ -6,6 +6,7 @@ import {
   PREV_IMAGE,
   NEXT_IMAGE,
   OPEN_CART,
+  CHECKOUT,
 } from "../../actions";
 
 const initState = {
@@ -82,6 +83,12 @@ const cartReducer = (state = initState, { type, payload }) => {
         openCart: !state.openCart,
       };
 
+    case CHECKOUT:
+      return {
+        ...state,
+        items: [],
+        openCart: false,
+      };
     default:
       return state;
   }

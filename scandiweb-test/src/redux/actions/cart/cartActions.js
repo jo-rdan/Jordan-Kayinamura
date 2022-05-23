@@ -5,6 +5,7 @@ import {
   NEXT_IMAGE,
   PREV_IMAGE,
   OPEN_CART,
+  CHECKOUT,
 } from "../index";
 
 export const changeQuantity = (operation, itemId) => (dispatch) => {
@@ -33,3 +34,5 @@ export const removeProduct = (currentItem) => (dispatch) => {
 };
 
 export const openCart = () => (dispatch) => dispatch({ type: OPEN_CART });
+
+export const checkout = () => (dispatch) => dispatch({ type: CHECKOUT });

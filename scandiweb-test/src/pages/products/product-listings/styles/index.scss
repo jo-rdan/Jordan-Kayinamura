@@ -11,12 +11,13 @@
     font-size: 42px;
     font-weight: 400;
     color: $category-color;
-    text-transform: capitalize
+    text-transform: capitalize;
+    padding: 10px 20px;
   }
 }
 
 .product-listing {
-  padding: 20px;
+  padding: 20px 0;
   display: flex;
   flex-direction: row;
   justify-content: center;

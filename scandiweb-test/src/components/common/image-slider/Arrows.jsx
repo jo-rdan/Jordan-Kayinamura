@@ -8,10 +8,11 @@ class Arrows extends Component {
 
 
   render() {
+    const { data, prevImage, nextImage } = this.props;
     return (
       <div className='arrows'>
-        <div className='left' onClick={() => this.props.prevImage(this.props.data)}>&lt;</div>
-        <div className='right' onClick={() => this.props.nextImage(this.props.data)}>&gt;</div>
+        <div className='left' onClick={() => prevImage(data)}>&lt;</div>
+        <div className='right' onClick={() => nextImage(data)}>&gt;</div>
       </div>
     )
   }

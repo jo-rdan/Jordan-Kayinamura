@@ -3,16 +3,16 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import CartDetails from "../../components/common/cart-details/CartDetails";
+import { checkout } from "../../redux/actions/cart/cartActions";
 import "./styles/index.css";
 
 class CartPage extends Component {
   render() {
-    const total = `${this.props.currencySymbol}${this.props.products
+    const { currencySymbol, products, checkout } = this.props;
+    const total = `${currencySymbol}${products
       .map((product) =>
         product.prices
-          .filter(
-            (price) => price.currency.symbol === this.props.currencySymbol
-          )
+          .filter((price) => price.currency.symbol === currencySymbol)
           .map((p) => p.amount * product.quantity)
       )
       .flat(1)
@@ -26,22 +26,18 @@ class CartPage extends Component {
       <div className='cart-container'>
         <h1>Cart</h1>
         <CartDetails size='normal' />
-        {this.props.products.length > 0 ? (
+        {products.length > 0 ? (
           <div className='fees'>
             <p>
-              Tax 18%:{" "}
-              <span>{`${this.props.currencySymbol}${tax.toFixed(2)}`}</span>
+              Tax 18%: <span>{`${currencySymbol}${tax.toFixed(2)}`}</span>
             </p>
             <p>
-              Quantity: <span>{this.props.products.length}</span>
+              Quantity: <span>{products.length}</span>
             </p>
             <p>
-              Total:{" "}
-              <span>{`${this.props.currencySymbol}${totalPrice.toFixed(
-                2
-              )}`}</span>
+              Total: <span>{`${currencySymbol}${totalPrice.toFixed(2)}`}</span>
             </p>
-            <button>ORDER</button>
+            <button onClick={() => checkout()}>ORDER</button>
           </div>
         ) : null}
       </div>
@@ -54,4 +50,7 @@ const mapStateToProps = (state) => ({
   currencySymbol: state.currencySwitcher.symbol,
 });
 
-export default compose(withRouter, connect(mapStateToProps))(CartPage);
+export default compose(
+  withRouter,
+  connect(mapStateToProps, { checkout })
+)(CartPage);

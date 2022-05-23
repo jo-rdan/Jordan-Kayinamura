@@ -14,40 +14,40 @@ class CartDetails extends Component {
 
 
   render() {
-
+    const { products, size, currentId, currentIndex, currencySymbol, changeQuantity, removeProduct } = this.props;
     return (
       <>
-        {this.props.products.length > 0 ? (
-          this.props.products.map((product) => {
+        {products.length > 0 ? (
+          products.map((product) => {
             return (
               <div
-                className={`${this.props.size === "normal" ? "products" : "mini"
+                className={`${size === "normal" ? "products" : "mini"
                   }-cart`}
               >
                 <div
-                  className={`${this.props.size === "normal" ? "product" : "mini"
+                  className={`${size === "normal" ? "product" : "mini"
                     }-details`}
                 >
                   <div
-                    className={`${this.props.size === "normal" ? "products" : "mini"
+                    className={`${size === "normal" ? "products" : "mini"
                       }-title`}
                   >
                     {product.name}
                   </div>
                   <p
-                    className={`${this.props.size === "normal" ? "products" : "mini"
+                    className={`${size === "normal" ? "products" : "mini"
                       }-subtitle`}
                   >
                     {product.brand}
                   </p>
                   <p
-                    className={`${this.props.size === "normal" ? "products" : "mini"
+                    className={`${size === "normal" ? "products" : "mini"
                       }-price`}
                   >
                     {product.prices
                       .filter(
                         (price) =>
-                          this.props.currencySymbol === price.currency.symbol
+                          currencySymbol === price.currency.symbol
                       )
                       .map(
                         (price) =>
@@ -64,7 +64,7 @@ class CartDetails extends Component {
                             <>
                               <h5>{attribute.name.toUpperCase()}: </h5>
                               <div
-                                className={`${this.props.size === "normal"
+                                className={`${size === "normal"
                                   ? "products"
                                   : "mini"
                                   }-sizes`}
@@ -72,7 +72,8 @@ class CartDetails extends Component {
                                 {attribute.items.map((item) => (
                                   <>
                                     <div
-                                      className={`${this.props.size === "normal"
+                                      key={item.id}
+                                      className={`${size === "normal"
                                         ? "products"
                                         : "mini"
                                         }-size ${product.selectedArgs[attribute.name] ===
@@ -99,7 +100,7 @@ class CartDetails extends Component {
                               <div>
                                 <h5>{attribute.name.toUpperCase()}: </h5>
                                 <div
-                                  className={`${this.props.size === "normal"
+                                  className={`${size === "normal"
                                     ? "products"
                                     : "mini"
                                     }-colors`}
@@ -107,7 +108,8 @@ class CartDetails extends Component {
                                   {attribute.items.map((item) => (
                                     <>
                                       <div
-                                        className={`${this.props.size === "normal"
+                                        key={item.id}
+                                        className={`${size === "normal"
                                           ? "products"
                                           : "mini"
                                           }-color ${product.selectedArgs[
@@ -132,13 +134,13 @@ class CartDetails extends Component {
                   </div>
                 </div>
                 <div
-                  className={`${this.props.size === "normal" ? "products" : "mini"
+                  className={`${size === "normal" ? "products" : "mini"
                     }-actions`}
                 >
                   <div className='controls'>
                     <div
                       className='plus'
-                      onClick={() => this.props.changeQuantity("+", product)}
+                      onClick={() => changeQuantity("+", product)}
                     >
                       +
                     </div>
@@ -147,21 +149,21 @@ class CartDetails extends Component {
                       className='minus'
                       onClick={() =>
                         product.quantity > 1 &&
-                        this.props.changeQuantity("-", product)
+                        changeQuantity("-", product)
                       }
                     >
                       -
                     </div>
                   </div>
                   <div
-                    className={`${this.props.size === "normal" ? "product" : "mini"
+                    className={`${size === "normal" ? "product" : "mini"
                       }-img`}
                   >
                     <SliderContent
-                      active={this.props.currentId === product.id && this.props.currentIndex <= product.gallery.length - 1 ? this.props.currentIndex : 0}
+                      active={currentId === product.id && currentIndex <= product.gallery.length - 1 ? currentIndex : 0}
                       content={product}
                     />
-                    {this.props.size === "normal" &&
+                    {size === "normal" &&
                       product.gallery.length > 1 ? (
                       <div className='carousel'>
                         <Arrows
@@ -172,9 +174,9 @@ class CartDetails extends Component {
                   </div>
                 </div>
                 <div
-                  className={`${this.props.size === "normal" ? "products" : "mini"
+                  className={`${size === "normal" ? "products" : "mini"
                     }-close`}
-                  onClick={() => this.props.removeProduct(product)}
+                  onClick={() => removeProduct(product)}
                 >
                   <p>x</p>
                 </div>

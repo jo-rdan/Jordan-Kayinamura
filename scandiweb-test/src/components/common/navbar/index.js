@@ -55,26 +55,33 @@ class NavBar extends Component {
           <img src={`${process.env.PUBLIC_URL}/images/logo.png`} alt='logo' />
         </div>
         <div className='nav-actions'>
-          <div
-            className='currency-switch'
-            onClick={this.handleShowCurrencies}
-            onBlur={this.handleShowCurrencies}
-            tabIndex='1'
-          >
-            {currencySymbol}
-            <span>
-              <img src={`${process.env.PUBLIC_URL}/images/arrow.png`} alt='' />
-            </span>
+          <div className='currency-switch' tabIndex={1}>
+            <button
+              onClick={this.handleShowCurrencies}
+              onBlur={this.handleShowCurrencies}
+            >
+              {currencySymbol}
+              <span>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/arrow.png`}
+                  alt=''
+                />
+              </span>
+            </button>
             {this.state.showCurrencies ? (
               <div className='dropdown'>
                 {currencies?.map((currency) => (
-                  <div
-                    key={currency.symbol}
-                    className={`dropdown-items ${
-                      currencySymbol === currency.symbol ? "selected" : ""
-                    }`}
-                    onClick={() => changeCurrencySymbol(currency.symbol)}
-                  >{`${currency.symbol} ${currency.label}`}</div>
+                  <div></div>
+                  // <div
+                  //   key={currency.symbol}
+                  //   className={`dropdown-items ${
+                  //     currencySymbol === currency.symbol ? "selected" : ""
+                  //   }`}
+                  //   onClick={() => console.log("-----")}
+                  // >
+                  //   {/* <button on={() => console.log("------?>>>>>>>")}> */}{" "}
+                  //   {`${currency.symbol} ${currency.label}`} {/* </button> */}
+                  // </div>
                 ))}
               </div>
             ) : null}

@@ -62,6 +62,13 @@
 
 .nav-actions .currency-switch {
   outline: none;
+}
+
+.nav-actions .currency-switch button {
+  outline: none;
+  background: none;
+  border: none;
+  font-size: large;
   cursor: pointer;
 }
 

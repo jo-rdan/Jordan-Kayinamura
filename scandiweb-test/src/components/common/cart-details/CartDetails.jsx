@@ -51,8 +51,7 @@ class CartDetails extends Component {
                       )
                       .map(
                         (price) =>
-                          `${price.currency.symbol}${(price.amount * product.quantity
-                          ).toFixed(2)}`
+                          `${price.currency.symbol}${parseFloat(price.amount).toFixed(2)}`
                       )}
                   </p>
 

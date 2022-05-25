@@ -20,7 +20,6 @@ class Products extends Component {
       selectedCategory,
       currencySymbol,
       addToCart,
-      location: { pathname },
     } = this.props;
     return (
       <>
@@ -45,13 +44,7 @@ class Products extends Component {
                 ) : null}
                 <div className='product'>
                   <div>
-                    <Link
-                      to={
-                        product.inStock
-                          ? `/${selectedCategory}/product/${product.id}`
-                          : `${pathname}`
-                      }
-                    >
+                    <Link to={`/${selectedCategory}/product/${product.id}`}>
                       <img
                         src={product.gallery[0]}
                         alt=''
@@ -74,14 +67,17 @@ class Products extends Component {
                     </span>
                   </div>
                   <div>
-                    <div className='product-name'>{product.name}</div>
+                    <div className='product-name'>{`${product.name} ${product.brand}`}</div>
                     <div className='product-price'>
                       {product.prices
                         .filter(
                           (price) => currencySymbol === price.currency.symbol
                         )
                         .map(
-                          (price) => `${price.currency.symbol}${price.amount}`
+                          (price) =>
+                            `${price.currency.symbol}${parseFloat(
+                              price.amount
+                            ).toFixed(2)}`
                         )}
                     </div>
                   </div>

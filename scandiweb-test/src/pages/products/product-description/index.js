@@ -108,7 +108,7 @@ class Product extends Component {
                           {attribute.items.map((item) => (
                             <div
                               className={` ${
-                                item.value === this.state.args.color
+                                item.value === this.state.args.Color
                                   ? "color-item"
                                   : ""
                               }`}
@@ -116,14 +116,10 @@ class Product extends Component {
                             >
                               <div
                                 key={item.id}
-                                className={`color ${
-                                  item.value === this.state.args.color
-                                    ? "selected"
-                                    : ""
-                                }`}
+                                className={"color"}
                                 style={{ backgroundColor: item.value }}
                                 onClick={() =>
-                                  this.selector("color", item.value)
+                                  this.selector("Color", item.value)
                                 }
                               ></div>
                             </div>
@@ -147,19 +143,16 @@ class Product extends Component {
               <button
                 type="button"
                 className={`action-btn ${
-                  (this.state.disable &&
-                    product.attributes.length > 0 &&
-                    product.attributes.every(
-                      (attribute) =>
-                        !Object.keys(this.state.args).includes(attribute.name)
-                    )) ||
-                  !product.inStock
+                  !product.attributes.every((attribute) =>
+                    Object.keys(this.state.args).includes(attribute.name)
+                  ) || !product.inStock
                     ? "disabled"
                     : ""
                 }`}
                 disabled={
-                  (this.state.disable && product.attributes.length > 0) ||
-                  !product.inStock
+                  !product.attributes.every((attribute) =>
+                    Object.keys(this.state.args).includes(attribute.name)
+                  ) || !product.inStock
                 }
                 onClick={() =>
                   addToCart({

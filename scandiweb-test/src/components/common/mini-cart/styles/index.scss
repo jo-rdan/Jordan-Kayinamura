@@ -5,7 +5,7 @@
   position: absolute;
   top: 83px;
   width: 100%;
-  min-height: 350vh;
+  min-height: 100vh;
   display: flex;
   justify-content: flex-end;
   z-index: 10;
@@ -14,7 +14,8 @@
 .mini-container {
   margin: 0 50px;
   width: 30%;
-  height: 2%;
+  max-height: 80vh;
+  overflow: scroll;
   padding: 20px 16px;
   background-color: rgb(253, 253, 253);
 }

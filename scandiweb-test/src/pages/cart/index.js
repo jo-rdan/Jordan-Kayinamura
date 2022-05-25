@@ -18,26 +18,31 @@ class CartPage extends Component {
       .flat(1)
       .reduce((a, b) => a + b, 0)}`;
 
-    const tax = parseFloat(total.slice(1)) * 0.18;
+    const tax = parseFloat(total.replace(currencySymbol, "")) * 0.18;
 
-    const totalPrice = parseFloat(total.slice(1)) + tax;
+    const totalPrice = parseFloat(total.replace(currencySymbol, "")) + tax;
 
     return (
-      <div className='cart-container'>
+      <div className="cart-container">
         <h1>Cart</h1>
-        <CartDetails size='normal' />
+        <CartDetails size="normal" />
         {products.length > 0 ? (
-          <div className='fees'>
+          <div className="fees">
             <p>
               Tax 18%: <span>{`${currencySymbol}${tax.toFixed(2)}`}</span>
             </p>
             <p>
-              Quantity: <span>{products.reduce(
-                      (acc, curr) => ({
-                        quantity: acc.quantity + curr.quantity,
-                      }),
-                      { quantity: 0 }
-                    ).quantity}</span>
+              Quantity:{" "}
+              <span>
+                {
+                  products.reduce(
+                    (acc, curr) => ({
+                      quantity: acc.quantity + curr.quantity,
+                    }),
+                    { quantity: 0 }
+                  ).quantity
+                }
+              </span>
             </p>
             <p>
               Total: <span>{`${currencySymbol}${totalPrice.toFixed(2)}`}</span>

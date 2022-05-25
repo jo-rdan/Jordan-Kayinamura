@@ -16,12 +16,19 @@ class NavBar extends Component {
     this.state = {
       showCurrencies: false,
     };
-    this.currencyRef = createRef();
 
     this.handleShowCurrencies = this.handleShowCurrencies.bind(this);
   }
 
-  handleShowCurrencies = (e) => {
+  componentDidMount() {
+    this.currencyRef = createRef();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.showCurrencies) return this.currencyRef.current.focus();
+  }
+
+  handleShowCurrencies = () => {
     this.setState({
       showCurrencies: !this.state.showCurrencies,
     });
@@ -55,35 +62,42 @@ class NavBar extends Component {
         <div className="logo">
           <img src={`${process.env.PUBLIC_URL}/images/logo.png`} alt="logo" />
         </div>
-        <div className='nav-actions'>
-          <div className='currency-switch' tabIndex={1} onClick={this.handleShowCurrencies}>
-              {currencySymbol}
-              <span>
+        <div className="nav-actions">
+          <div className="currency-switch" onClick={this.handleShowCurrencies}>
+            {currencySymbol}
+            <span>
+              <button>
                 <img
                   src={`${process.env.PUBLIC_URL}/images/arrow.png`}
-                  alt=''
+                  alt=""
                 />
-              </span>
-            {this.state.showCurrencies ? (
-              <div className="dropdown" 
-              ref={this.currencyRef}
-              // onBlur={() => console.log('inshuti')}
-              >
-                {currencies?.map((currency) => (
-                  <div
-                    key={currency.symbol}
-                    className={`dropdown-items ${
-                      currencySymbol === currency.symbol ? "selected" : ""
-                    }`}
-                    onClick={() => changeCurrencySymbol(currency.symbol)}
-                  >
-                    {`${currency.symbol} ${currency.label}`}
-                  </div>
-                ))}
-              </div>
-            ) : null}
+              </button>
+            </span>
           </div>
-          <div className="cart-icon" onClick={() => openCart()} tabIndex={"1"}>
+          {this.state.showCurrencies ? (
+            <div
+              className="dropdown"
+              tabIndex={"0"}
+              ref={this.currencyRef}
+              onBlur={this.handleShowCurrencies}
+            >
+              {currencies?.map((currency) => (
+                <div
+                  key={currency.symbol}
+                  className={`dropdown-items ${
+                    currencySymbol === currency.symbol ? "selected" : ""
+                  }`}
+                  onClick={() => {
+                    changeCurrencySymbol(currency.symbol);
+                    this.setState({ showCurrencies: false });
+                  }}
+                >
+                  {`${currency.symbol} ${currency.label}`}
+                </div>
+              ))}
+            </div>
+          ) : null}
+          <div className="cart-icon" onClick={() => openCart()}>
             <img src={`${process.env.PUBLIC_URL}/images/cart.png`} alt="" />
             {items.length > 0 ? (
               <div className="badge">

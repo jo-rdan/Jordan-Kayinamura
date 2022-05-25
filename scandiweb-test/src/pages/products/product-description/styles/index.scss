@@ -101,6 +101,11 @@
     gap: 10px;
     align-items: center;
 
+    .color-item {
+      border: 1px solid $primary-color;
+      padding: 1px;
+    }
+
     .color {
       display: flex;
       justify-content: center;
@@ -108,10 +113,7 @@
       width: 32px;
       height: 32px;
       cursor: pointer;
-    }
-
-    .selected {
-      border: 1px solid $primary-color;
+      
     }
   }
 

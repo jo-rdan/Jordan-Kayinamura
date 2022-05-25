@@ -32,7 +32,12 @@ class CartPage extends Component {
               Tax 18%: <span>{`${currencySymbol}${tax.toFixed(2)}`}</span>
             </p>
             <p>
-              Quantity: <span>{products.length}</span>
+              Quantity: <span>{products.reduce(
+                      (acc, curr) => ({
+                        quantity: acc.quantity + curr.quantity,
+                      }),
+                      { quantity: 0 }
+                    ).quantity}</span>
             </p>
             <p>
               Total: <span>{`${currencySymbol}${totalPrice.toFixed(2)}`}</span>

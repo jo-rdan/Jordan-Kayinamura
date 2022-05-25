@@ -5,16 +5,13 @@
 .fees {
   width: 25%;
 }
-
 .fees p {
   font-size: 24px;
 }
-
 .fees p span {
   font-weight: bold;
   font-size: 24px;
 }
-
 .fees button {
   width: 100%;
   border: none;
@@ -25,5 +22,4 @@
   font-size: 16px;
   outline: none;
   cursor: pointer;
-}
-/*# sourceMappingURL=index.css.map */
+}/*# sourceMappingURL=index.css.map */

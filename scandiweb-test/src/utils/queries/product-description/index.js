@@ -6,6 +6,7 @@ export const getProduct = gql`
       id
       name
       brand
+      inStock
       description
       attributes {
         id

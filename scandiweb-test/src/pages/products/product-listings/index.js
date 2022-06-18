@@ -20,15 +20,14 @@ class Products extends Component {
       selectedCategory,
       currencySymbol,
       addToCart,
-      location: { pathname },
     } = this.props;
     return (
       <>
-        <div className='product-container'>
-          <div className='product-category'>
+        <div className="product-container">
+          <div className="product-category">
             <p>{category?.name}</p>
           </div>
-          <div className='product-listing'>
+          <div className="product-listing">
             {category?.products.map((product) => (
               <div
                 className={`product-card ${
@@ -37,51 +36,52 @@ class Products extends Component {
                 key={product.id}
               >
                 {!product.inStock ? (
-                  <div className='product-stock'>
+                  <div className="product-stock">
                     <span>
                       <p>out of stock</p>
                     </span>
                   </div>
                 ) : null}
-                <div className='product'>
+                <div className="product">
                   <div>
-                    <Link
-                      to={
-                        product.inStock
-                          ? `/${selectedCategory}/product/${product.id}`
-                          : `${pathname}`
-                      }
-                    >
+                    <Link to={`/${selectedCategory}/product/${product.id}`}>
                       <img
                         src={product.gallery[0]}
-                        alt=''
-                        className='product-img'
+                        alt=""
+                        className="product-img"
                       />
                     </Link>
                     <span
-                      className='cart-hover'
+                      className="cart-hover"
                       onClick={() =>
-                        product.attributes.length <= 0 && product.inStock
+                        product.inStock
                           ? addToCart({
                               ...product,
-                              selectedArgs: this.state,
+                              selectedArgs: {
+                                ...product.attributes.map((attr) => ({
+                                  [attr.id]: attr.items[0].value,
+                                })),
+                              },
                               quantity: 1,
                             })
                           : null
                       }
                     >
-                      <img src='./images/cart_hover.png' alt='' />
+                      <img src="./images/cart_hover.png" alt="" />
                     </span>
                   </div>
                   <div>
-                    <div className='product-name'>{product.name}</div>
-                    <div className='product-price'>
+                    <div className="product-name">{`${product.brand} ${product.name}`}</div>
+                    <div className="product-price">
                       {product.prices
                         .filter(
                           (price) => currencySymbol === price.currency.symbol
                         )
                         .map(
-                          (price) => `${price.currency.symbol}${price.amount}`
+                          (price) =>
+                            `${price.currency.symbol}${parseFloat(
+                              price.amount
+                            ).toFixed(2)}`
                         )}
                     </div>
                   </div>

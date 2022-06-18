@@ -11,94 +11,71 @@
 }
 
 .product-listing {
-  padding: 20px 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  gap: 13px;
+  padding: 20px;
+  max-width: 100%;
+  margin: 10% auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
 }
-
 .product-listing .out-stock {
-  opacity: .5;
+  opacity: 0.5;
 }
-
 .product-listing .product-card {
   background-color: white;
   padding: 15px;
 }
-
 .product-listing .product-card .product-img {
   width: 350px;
   height: 350px;
   -o-object-fit: contain;
      object-fit: contain;
 }
-
 .product-listing .product-card:hover {
-  background-color: white;
-  -webkit-box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
-          box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
 }
-
 .product-listing .product-card:hover .product .cart-hover {
   display: block;
   position: relative;
   cursor: pointer;
 }
-
 .product-listing .product-card:hover .product .cart-hover img {
   position: absolute;
   top: -30px;
   right: 6px;
 }
-
 .product-listing .product-card .product-stock {
   position: relative;
 }
-
 .product-listing .product-card .product-stock span {
   position: absolute;
   top: 120px;
   left: 90px;
 }
-
 .product-listing .product-card .product-stock span p {
   text-transform: uppercase;
   font-weight: 400;
   font-size: 24px;
   line-height: 160%;
 }
-
 .product-listing .product-card .product > div {
   margin-bottom: 20px;
 }
-
 .product-listing .product-card .product .product-name {
   font-weight: 400;
   font-size: 20px;
   line-height: 160%;
 }
-
 .product-listing .product-card .product .product-price {
   font-weight: 600;
   font-size: 20px;
   line-height: 160%;
 }
-
 .product-listing .product-card .product .cart-hover {
   display: none;
 }
 
 .product-listing > * {
   margin-bottom: 100px;
-}
-/*# sourceMappingURL=index.css.map */
+}/*# sourceMappingURL=index.css.map */

@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { graphql } from "react-apollo";
+import parse from "html-react-parser";
 import { getProduct } from "../../../utils/queries/product-description";
 import "./styles/index.css";
 import { withRouter } from "react-router-dom";
@@ -31,13 +32,14 @@ class Product extends Component {
       currencySymbol,
       addToCart,
     } = this.props;
+
     return (
-      <div className='container'>
+      <div className="container">
         {product ? (
           <>
-            <div className='product-graphics'>
+            <div className="product-graphics">
               {/* 1  */}
-              <div className='thumbnails'>
+              <div className="thumbnails">
                 {/* thumbnails */}
                 {product.gallery.map((image, index) => (
                   <div
@@ -47,29 +49,29 @@ class Product extends Component {
                     key={index}
                     onClick={() => this.setState({ image })}
                   >
-                    <img src={image} alt='' className='product-image' />
+                    <img src={image} alt="" className="product-image" />
                   </div>
                 ))}
               </div>
               {/* product image */}
-              <div className='product-img'>
-                <img src={this.state.image || product.gallery[0]} alt='' />
+              <div className="product-img">
+                <img src={this.state.image || product.gallery[0]} alt="" />
               </div>
             </div>
-            <div className='product-info'>
-              <div className='product-details'>
-                <div className='title'>{product.name}</div>
-                <div className='subtitle'>{product.brand}</div>
+            <div className="product-info">
+              <div className="product-details">
+                <div className="title">{product.name}</div>
+                <div className="subtitle">{product.brand}</div>
               </div>
               {product.attributes.map((attribute) => {
                 switch (attribute.type) {
                   case "text":
                     return (
-                      <div className='product-size' key={attribute.id}>
-                        <h5 className='size-label'>
+                      <div className="product-size" key={attribute.id}>
+                        <h5 className="size-label">
                           {attribute.name.toUpperCase()}:{" "}
                         </h5>
-                        <div className='size-options'>
+                        <div className="size-options">
                           {attribute.items.map((item) => (
                             <>
                               <div
@@ -98,26 +100,29 @@ class Product extends Component {
                     );
                   case "swatch":
                     return (
-                      <div className='product-color' key={attribute.id}>
-                        <h5 className='color-label'>
+                      <div className="product-color" key={attribute.id}>
+                        <h5 className="color-label">
                           {attribute.name.toUpperCase()}:{" "}
                         </h5>
-                        <div className='color-options'>
+                        <div className="color-options">
                           {attribute.items.map((item) => (
-                            <>
+                            <div
+                              className={` ${
+                                item.value === this.state.args.Color
+                                  ? "color-item"
+                                  : ""
+                              }`}
+                              key={item.id}
+                            >
                               <div
                                 key={item.id}
-                                className={`color ${
-                                  item.value === this.state.args.color
-                                    ? "selected"
-                                    : ""
-                                }`}
+                                className={"color"}
                                 style={{ backgroundColor: item.value }}
                                 onClick={() =>
-                                  this.selector("color", item.value)
+                                  this.selector("Color", item.value)
                                 }
                               ></div>
-                            </>
+                            </div>
                           ))}
                         </div>
                       </div>
@@ -127,27 +132,28 @@ class Product extends Component {
                 }
               })}
 
-              <div className='product-price'>
-                <h5 className='price-label'>PRICE: </h5>
-                <p className='price'>
+              <div className="product-price">
+                <h5 className="price-label">PRICE: </h5>
+                <p className="price">
                   {product.prices
                     .filter((price) => currencySymbol === price.currency.symbol)
                     .map((price) => `${price.currency.symbol}${price.amount}`)}
                 </p>
               </div>
               <button
-                type='button'
+                type="button"
                 className={`action-btn ${
-                  this.state.disable &&
-                  product.attributes.length > 0 &&
-                  product.attributes.every(
-                    (attribute) =>
-                      !Object.keys(this.state.args).includes(attribute.name)
-                  )
+                  !product.attributes.every((attribute) =>
+                    Object.keys(this.state.args).includes(attribute.name)
+                  ) || !product.inStock
                     ? "disabled"
                     : ""
                 }`}
-                disabled={this.state.disable && product.attributes.length > 0}
+                disabled={
+                  !product.attributes.every((attribute) =>
+                    Object.keys(this.state.args).includes(attribute.name)
+                  ) || !product.inStock
+                }
                 onClick={() =>
                   addToCart({
                     ...product,
@@ -159,11 +165,7 @@ class Product extends Component {
                 Add to Cart
               </button>
               <div>
-                <p
-                  dangerouslySetInnerHTML={{
-                    __html: product.description,
-                  }}
-                ></p>
+                <p>{parse(product.description)}</p>
               </div>
             </div>
           </>

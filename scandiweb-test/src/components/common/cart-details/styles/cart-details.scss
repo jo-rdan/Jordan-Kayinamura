@@ -1,11 +1,10 @@
-@import './extendables';
+@import "./extendables";
 
 // 'normal' size styles
 
 .products-cart {
   @extend %p-cart;
 }
-
 
 .product-details {
   @extend %p-details;
@@ -50,8 +49,6 @@
     .active {
       @extend %active-color;
     }
-
-
   }
 }
 
@@ -93,14 +90,13 @@
       %arrow-container {
         width: 24px;
         height: 24px;
-        background-color: #1D1F22;
+        background-color: #1d1f22;
         color: white;
-        opacity: .7;
+        opacity: 0.7;
         display: flex;
         justify-content: center;
         align-items: center;
         cursor: pointer;
-
       }
 
       .left,
@@ -123,8 +119,6 @@
     font-weight: 100;
   }
 }
-
-
 
 // 'mini' size styles
 
@@ -173,7 +167,6 @@
   .selected {
     @extend %size-selected;
   }
-
 }
 
 .mini-colors {
@@ -207,7 +200,6 @@
       height: 24px;
       font-size: 16px;
     }
-
   }
 
   .mini-img {

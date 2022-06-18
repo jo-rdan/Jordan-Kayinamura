@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, createRef } from "react";
 import { NavLink } from "react-router-dom";
 import { graphql } from "react-apollo";
 import { compose } from "redux";
@@ -20,9 +20,17 @@ class NavBar extends Component {
     this.handleShowCurrencies = this.handleShowCurrencies.bind(this);
   }
 
-  handleShowCurrencies = (e) => {
+  componentDidMount() {
+    this.currencyRef = createRef();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.showCurrencies) return this.currencyRef.current.focus();
+  }
+
+  handleShowCurrencies = () => {
     this.setState({
-      showCurrencies: e.type === "blur" ? false : !this.state.showCurrencies,
+      showCurrencies: !this.state.showCurrencies,
     });
   };
 
@@ -37,8 +45,8 @@ class NavBar extends Component {
       openCart,
     } = this.props;
     return (
-      <div className='nav-container'>
-        <ul className='nav-items'>
+      <div className="nav-container">
+        <ul className="nav-items">
           {categories?.map((category) => (
             <li className={`nav-item`} key={category.name}>
               <NavLink
@@ -51,38 +59,48 @@ class NavBar extends Component {
             </li>
           ))}
         </ul>
-        <div className='logo'>
-          <img src={`${process.env.PUBLIC_URL}/images/logo.png`} alt='logo' />
+        <div className="logo">
+          <img src={`${process.env.PUBLIC_URL}/images/logo.png`} alt="logo" />
         </div>
-        <div className='nav-actions'>
-          <div
-            className='currency-switch'
-            onClick={this.handleShowCurrencies}
-            onBlur={this.handleShowCurrencies}
-            tabIndex='1'
-          >
+        <div className="nav-actions">
+          <div className="currency-switch" onClick={this.handleShowCurrencies}>
             {currencySymbol}
             <span>
-              <img src={`${process.env.PUBLIC_URL}/images/arrow.png`} alt='' />
+              <button>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/arrow.png`}
+                  alt=""
+                />
+              </button>
             </span>
-            {this.state.showCurrencies ? (
-              <div className='dropdown'>
-                {currencies?.map((currency) => (
-                  <div
-                    key={currency.symbol}
-                    className={`dropdown-items ${
-                      currencySymbol === currency.symbol ? "selected" : ""
-                    }`}
-                    onClick={() => changeCurrencySymbol(currency.symbol)}
-                  >{`${currency.symbol} ${currency.label}`}</div>
-                ))}
-              </div>
-            ) : null}
           </div>
-          <div className='cart-icon' onClick={() => openCart()} tabIndex={"1"}>
-            <img src={`${process.env.PUBLIC_URL}/images/cart.png`} alt='' />
+          {this.state.showCurrencies ? (
+            <div
+              className="dropdown"
+              tabIndex={"0"}
+              ref={this.currencyRef}
+              onBlur={this.handleShowCurrencies}
+            >
+              {currencies?.map((currency) => (
+                <div
+                  key={currency.symbol}
+                  className={`dropdown-items ${
+                    currencySymbol === currency.symbol ? "selected" : ""
+                  }`}
+                  onClick={() => {
+                    changeCurrencySymbol(currency.symbol);
+                    this.setState({ showCurrencies: false });
+                  }}
+                >
+                  {`${currency.symbol} ${currency.label}`}
+                </div>
+              ))}
+            </div>
+          ) : null}
+          <div className="cart-icon" onClick={() => openCart()}>
+            <img src={`${process.env.PUBLIC_URL}/images/cart.png`} alt="" />
             {items.length > 0 ? (
-              <div className='badge'>
+              <div className="badge">
                 <span>
                   {
                     items.reduce(
